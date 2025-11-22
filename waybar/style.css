@@ -1,0 +1,120 @@
+@import "colors.css";
+
+* {
+    border: none;
+    border-radius: 0;
+    font-family: SF Pro Display, JetBrainsMono, Roboto, Helvetica, Arial, sans-serif;
+    font-size: 9px;
+    min-height: 0;
+}
+
+/* Waybar panel */
+window#waybar {
+    background: @surface;        /* main panel background */
+    color: @on_surface;          /* default text color */
+    font-size: 9px;
+    padding: 2px 5px;
+    border: none;
+}
+
+/* Tooltips */
+tooltip {
+    background: rgba(43, 48, 59, 0.8);
+    border: 1px solid rgba(144, 144, 154, 0.5); /* outline_variant */
+}
+
+tooltip label {
+    color: @on_surface;
+}
+
+/* Workspaces */
+#workspaces button {
+    padding: 0 5px;
+    background: transparent;
+    color: @on_surface_variant;
+    border-bottom: 3px solid transparent;
+}
+
+/* Active workspace */
+#workspaces button.active {
+    color: @on_primary;
+    background: @primary_container; /* primary container background */
+
+    border: 1px solid transparent;
+    border-radius: 6px;
+
+    /* Gradient border using Matugen primary shades */
+    background-image:
+        linear-gradient(@primary_container, @primary_container),
+        linear-gradient(45deg, @primary, @primary_fixed_dim);
+    background-origin: border-box;
+    background-clip: padding-box, border-box;
+}
+
+/* Hovered workspace */
+#workspaces button:hover {
+    background: @secondary_container;
+    color: @on_secondary_container;
+}
+
+/* Modules common styles */
+#mode,
+#clock,
+#battery,
+#network,
+#cpu,
+#memory,
+#pulseaudio {
+    padding: 5px 10px;
+    border-radius: 50px;
+
+    /* Gradient border using Matugen primary shades */
+    background-image:
+        linear-gradient(@surface_container, @surface_container),
+        linear-gradient(45deg, @primary, @primary_fixed_dim);
+    background-origin: border-box;
+    background-clip: padding-box, border-box;
+
+    color: @on_surface;
+}
+
+/* Mode indicator */
+#mode {
+    background: @secondary_container;
+    border-bottom: 3px solid @on_secondary_container;
+}
+
+/* Clock */
+#clock {
+    background-color: @surface_container_high;
+    color: @on_surface;
+}
+
+/* Battery */
+#battery {
+    background-color: @surface_container_high;
+    color: @on_surface;
+}
+
+#battery.charging {
+    background: @secondary;
+    color: @on_secondary;
+}
+
+#battery.warning:not(.charging) {
+    background: @error;
+    color: @on_error;
+    animation-name: blink;
+    animation-duration: 0.5s;
+    animation-timing-function: steps(12);
+    animation-iteration-count: infinite;
+    animation-direction: alternate;
+}
+
+/* Keyframes for battery warning blink */
+@keyframes blink {
+    to {
+        background-color: @error_container;
+        color: @on_error_container;
+    }
+}
